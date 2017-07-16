@@ -1,7 +1,9 @@
 ustom ###
-.config_secret
+.config_secret/
 .idea/
 *.swp
+.static_root/
+.config/
 
 # Created by https://www.gitignore.io/api/vim
 
