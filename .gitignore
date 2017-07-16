@@ -4,6 +4,7 @@ ustom ###
 *.swp
 .static_root/
 .config/
+.media/
 
 # Created by https://www.gitignore.io/api/vim
 
@@ -259,3 +260,8 @@ ENV/
 # End of https://www.gitignore.io/api/macos,django,python,pycharm
 
 
+
+# Elastic Beanstalk Files
+.elasticbeanstalk/*
+!.elasticbeanstalk/*.cfg.yml
+!.elasticbeanstalk/*.global.yml
