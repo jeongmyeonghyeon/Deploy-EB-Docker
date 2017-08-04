@@ -1,4 +1,4 @@
-FROM        jeongmyeonghyeon/eb_ubuntu
+FROM        jeongmyeonghyeon/eb-docker
 MAINTAINER  jeongmyeonghyeon@gmail.com
 
 # 현재경로의 모든 파일들을 컨테이너의 /srv/deploy_eb_docker폴더에 복사
@@ -18,8 +18,15 @@ COPY        .config/nginx/nginx-app.conf /etc/nginx/sites-available/nginx-app.co
 RUN         rm -rf /etc/nginx/sites-enabled/default
 RUN         ln -sf /etc/nginx/sites-available/nginx-app.conf /etc/nginx/sites-enabled/nginx-app.conf
 
+# front프로젝트 복사
+WORKDIR     /srv
+RUN         git clone https://github.com/jeongmyeonghyeon/front-example.git
+WORKDIR     /srv/front-example
+RUN         npm install
+RUN         npm run build
+
 # collectstatic
-RUN         /root/.pyenv/versions/deploy_eb_docker/bin/python /srv/deploy_eb_docker/django_app/manage.py collectstatic --settings=config.settings.deploy --noinput
+#RUN         /root/.pyenv/versions/deploy_eb_docker/bin/python /srv/deploy_eb_docker/django_app/manage.py collectstatic --settings=config.settings.deploy --noinput
 
 CMD         supervisord -n
 
